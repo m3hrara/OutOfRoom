@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameCanvas : MonoBehaviour
 {
+    private int frame, max;
     public MovementComponent movementComponent;
     public TMP_Text message;
     public GameObject panel;
@@ -28,6 +29,8 @@ public class GameCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        frame = 0;
+        max = 120;
         numOfPlays = 2;
         movementComponent = FindObjectOfType<MovementComponent>();
         panel.SetActive(false);
@@ -56,37 +59,42 @@ public class GameCanvas : MonoBehaviour
                 groundArray[row, column].gameObject.transform.position = groundPos;
                 groundArray[row, column].row = row;
                 groundArray[row, column].column = column;
-                groundPos.x += 4;
+                groundPos.x += 4.8f;
             }
             startPos.x = 12.5f;
             startPos.y -= 6;
 
             groundPos.x = 15f;
-            groundPos.z -= 4;
+            groundPos.z -= 4.8f;
         }
         RandomizePattern();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(checkmark==4)
         {
-            message.text = "Good job! This is round two!";
-            numOfGreens = 4;
-            ResetColor();
-            RandomizePattern();
-            ball1.gameObject.SetActive(false);
-            ball2.gameObject.SetActive(false);
-            ball3.gameObject.SetActive(false);
-            ball4.gameObject.SetActive(false);
-            ball5.gameObject.SetActive(true);
-            ball6.gameObject.SetActive(true);
-            ball7.gameObject.SetActive(true);
-            ball8.gameObject.SetActive(true);
+            frame++;
+            if(frame==max)
+            {
+                frame = 0;
+                message.text = "Good job! This is round two!";
+                numOfGreens = 4;
+                ResetColor();
+                RandomizePattern();
+                ball1.gameObject.SetActive(false);
+                ball2.gameObject.SetActive(false);
+                ball3.gameObject.SetActive(false);
+                ball4.gameObject.SetActive(false);
+                ball5.gameObject.SetActive(true);
+                ball6.gameObject.SetActive(true);
+                ball7.gameObject.SetActive(true);
+                ball8.gameObject.SetActive(true);
 
-            checkmark = 0;
-            numOfPlays--;
+                checkmark = 0;
+                numOfPlays--;
+            }
         }
         else if(numOfPlays==0)
         {

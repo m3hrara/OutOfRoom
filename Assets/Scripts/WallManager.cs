@@ -18,10 +18,10 @@ public class WallManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        leftPos += 0.015f;
+        leftPos += 0.02f;
         leftWall.transform.position = new Vector3(leftPos, leftWall.transform.position.y, leftWall.transform.position.z);
 
-        rightPos -= 0.015f;
+        rightPos -= 0.02f;
         rightWall.transform.position = new Vector3(rightPos, rightWall.transform.position.y, rightWall.transform.position.z);
     }
     private void Update()
