@@ -28,6 +28,7 @@ public class WallManager : MonoBehaviour
     {
         if(leftPos>=12.5 && rightPos<=22.5)
         {
+            gameCanvas.winLose.text = "YOU LOST!";
             gameCanvas.numOfPlays = 0;
         }
     }

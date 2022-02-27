@@ -8,6 +8,7 @@ public class GameCanvas : MonoBehaviour
     private int frame, max;
     public MovementComponent movementComponent;
     public TMP_Text message;
+    public TMP_Text winLose;
     public GameObject panel;
     public GameObject ball1, ball2, ball3, ball4;
     public GameObject ball5, ball6, ball7, ball8;
@@ -36,6 +37,7 @@ public class GameCanvas : MonoBehaviour
         panel.SetActive(false);
         message.gameObject.SetActive(true);
         message.text = "Move the boxes to match the pattern on the wall! Do it twice before you're out of room!";
+        winLose.text = "YOU WON!";
         Time.timeScale = 1;
         quaternion = new Quaternion();
         quaternion.Set(1f, 0, 0, 1);
