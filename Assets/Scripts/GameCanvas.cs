@@ -36,7 +36,7 @@ public class GameCanvas : MonoBehaviour
         movementComponent = FindObjectOfType<MovementComponent>();
         panel.SetActive(false);
         message.gameObject.SetActive(true);
-        message.text = "Move the boxes to match the pattern on the wall! Do it twice before you're out of room!";
+        message.text = "Move the boxes to match the pattern on the wall!";
         winLose.text = "YOU WON!";
         Time.timeScale = 1;
         quaternion = new Quaternion();
