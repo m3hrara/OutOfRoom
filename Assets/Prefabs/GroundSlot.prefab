@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2167231437358178660}
   - component: {fileID: 7021208438690534095}
   - component: {fileID: 1776431349109882512}
+  - component: {fileID: 4492336746319947758}
   m_Layer: 0
   m_Name: GroundSlot
   m_TagString: Untagged
@@ -95,3 +96,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4492336746319947758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045165941460969946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52d8d7e5756c644ea2832e4833b46ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  row: 0
+  column: 0
+  isGreen: 0

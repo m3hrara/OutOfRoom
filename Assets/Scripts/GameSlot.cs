@@ -29,4 +29,12 @@ public class GameSlot : MonoBehaviour
             this.GetComponent<MeshRenderer>().material = redMat;
         }
     }
+    public void SetGreen()
+    {
+        this.GetComponent<MeshRenderer>().material = greenMat;
+    }
+    public void SetRed()
+    {
+        this.GetComponent<MeshRenderer>().material = redMat;
+    }
 }
