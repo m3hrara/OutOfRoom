@@ -5,12 +5,13 @@ using TMPro;
 
 public class GameCanvas : MonoBehaviour
 {
+    public MovementComponent movementComponent;
     public TMP_Text message;
     public GameObject panel;
     public GameObject ball1, ball2, ball3, ball4;
     public GameObject ball5, ball6, ball7, ball8;
     public int checkmark = 0;
-    public int numOfPlays = 2;
+    public int numOfPlays;
     [SerializeField]
     private GameSlot gameSlot;
     [SerializeField]
@@ -27,6 +28,8 @@ public class GameCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numOfPlays = 2;
+        movementComponent = FindObjectOfType<MovementComponent>();
         panel.SetActive(false);
         message.gameObject.SetActive(true);
         message.text = "Move the boxes to match the pattern on the wall! Do it twice before you're out of room!";
@@ -35,7 +38,7 @@ public class GameCanvas : MonoBehaviour
         quaternion.Set(1f, 0, 0, 1);
         numOfGreens = 4;
         Vector3 tempPos = transform.position;
-        startPos = new Vector3(15, 17, 87);
+        startPos = new Vector3(12.5f, 17, 87);
         groundPos = new Vector3(15f, -3.2f, 52f);
         gridArray = new GameSlot[3, 3];
         groundArray = new GroundSlot[3, 3];
@@ -55,7 +58,7 @@ public class GameCanvas : MonoBehaviour
                 groundArray[row, column].column = column;
                 groundPos.x += 4;
             }
-            startPos.x = 15;
+            startPos.x = 12.5f;
             startPos.y -= 6;
 
             groundPos.x = 15f;
@@ -89,6 +92,7 @@ public class GameCanvas : MonoBehaviour
         {
             message.gameObject.SetActive(false);
             Time.timeScale = 0;
+            movementComponent.isPaused = true;
             panel.SetActive(true);
         }
     }
