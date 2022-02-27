@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameCanvas : MonoBehaviour
 {
+    public TMP_Text message;
+    public GameObject panel;
     public GameObject ball1, ball2, ball3, ball4;
     public GameObject ball5, ball6, ball7, ball8;
     public int checkmark = 0;
@@ -24,6 +27,10 @@ public class GameCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        panel.SetActive(false);
+        message.gameObject.SetActive(true);
+        message.text = "Move the boxes to match the pattern on the wall! Do it twice before you're out of room!";
+        Time.timeScale = 1;
         quaternion = new Quaternion();
         quaternion.Set(1f, 0, 0, 1);
         numOfGreens = 4;
@@ -62,6 +69,7 @@ public class GameCanvas : MonoBehaviour
     {
         if(checkmark==4)
         {
+            message.text = "Good job! This is round two!";
             numOfGreens = 4;
             ResetColor();
             RandomizePattern();
@@ -79,7 +87,9 @@ public class GameCanvas : MonoBehaviour
         }
         else if(numOfPlays==0)
         {
-            // end game
+            message.gameObject.SetActive(false);
+            Time.timeScale = 0;
+            panel.SetActive(true);
         }
     }
     void RandomizePattern()

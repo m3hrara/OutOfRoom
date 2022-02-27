@@ -39,10 +39,6 @@ public class MovementComponent : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
-        if(!GameManager.instance.cursorActive)
-        {
-            AppEvents.InvokeMouseCursorEnable(false);
-        }
     }
 
     void Update()
