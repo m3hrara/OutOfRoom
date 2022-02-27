@@ -12,7 +12,8 @@ public class MovementComponent : MonoBehaviour
     float runSpeed = 10;
     [SerializeField]
     float jumpForce = 5;
-
+    [SerializeField]
+    float forceMagnitude;
     //components
     private PlayerController playerController;
     Rigidbody rigidbody;
@@ -124,5 +125,16 @@ public class MovementComponent : MonoBehaviour
 
         playerController.isJumping = false;
         playerAnimator.SetBool(isJumpingHash, false);
+        if(collision.gameObject.CompareTag("moveable"))
+        {
+            Rigidbody rb = collision.collider.attachedRigidbody;
+            if(rb !=null)
+            {
+                Vector3 forceDir = collision.gameObject.transform.position - transform.position;
+                forceDir.y = 0;
+                forceDir.Normalize();
+                rb.AddForceAtPosition(forceDir * forceMagnitude, transform.position, ForceMode.Impulse);
+            }
+        }
     }
 }
