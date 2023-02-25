@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52d8d7e5756c644ea2832e4833b46ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCanvas: {fileID: 0}
   row: 0
   column: 0
   isGreen: 0

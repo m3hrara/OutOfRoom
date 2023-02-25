@@ -7,13 +7,14 @@ public class GameCanvas : MonoBehaviour
 {
     private int frame, max;
     public MovementComponent movementComponent;
-    public TMP_Text message;
-    public TMP_Text winLose;
+    //public TMP_Text message;
+    //public TMP_Text winLose;
     public GameObject panel;
-    public GameObject ball1, ball2, ball3, ball4;
-    public GameObject ball5, ball6, ball7, ball8;
+    public GameObject box1, box2, box3, box4;
+    //public GameObject box5, box6, box7, box8;
+    private Vector3 box1pos, box2pos, box3pos, box4pos;
     public int checkmark = 0;
-    public int numOfPlays;
+    //public int numOfPlays;
     [SerializeField]
     private GameSlot gameSlot;
     [SerializeField]
@@ -31,22 +32,28 @@ public class GameCanvas : MonoBehaviour
     void Start()
     {
         frame = 0;
-        max = 120;
-        numOfPlays = 2;
+        max = 100;
+        //numOfPlays = 2;
         movementComponent = FindObjectOfType<MovementComponent>();
         panel.SetActive(false);
-        message.gameObject.SetActive(true);
-        message.text = "Move the boxes to match the pattern on the wall!";
-        winLose.text = "YOU WON!";
+        //message.gameObject.SetActive(true);
+       // message.text = "";
+        //winLose.text = "YOU WON!";
         Time.timeScale = 1;
         quaternion = new Quaternion();
         quaternion.Set(1f, 0, 0, 1);
         numOfGreens = 4;
         Vector3 tempPos = transform.position;
-        startPos = new Vector3(12.5f, 17, 87);
+        startPos = new Vector3(15.7f, 12, 67.5f);
         groundPos = new Vector3(15f, -3.2f, 52f);
         gridArray = new GameSlot[3, 3];
         groundArray = new GroundSlot[3, 3];
+
+        box1pos = box1.transform.position;
+        box2pos = box2.transform.position;
+        box3pos = box3.transform.position;
+        box4pos = box4.transform.position;
+
         for (int row =0;row<3;row++)
         {
             for (int column = 0; column < 3; column++)
@@ -55,7 +62,7 @@ public class GameCanvas : MonoBehaviour
                 gridArray[row, column].gameObject.transform.position = startPos;
                 gridArray[row, column].row = row;
                 gridArray[row, column].column = column;
-                startPos.x += 6;
+                startPos.x += 4;
 
                 groundArray[row, column] = Instantiate(groundSlot,tempPos, quaternion);
                 groundArray[row, column].gameObject.transform.position = groundPos;
@@ -63,8 +70,8 @@ public class GameCanvas : MonoBehaviour
                 groundArray[row, column].column = column;
                 groundPos.x += 4.8f;
             }
-            startPos.x = 12.5f;
-            startPos.y -= 6;
+            startPos.x = 15.7f;
+            startPos.y -= 4;
 
             groundPos.x = 15f;
             groundPos.z -= 4.8f;
@@ -81,30 +88,38 @@ public class GameCanvas : MonoBehaviour
             if(frame==max)
             {
                 frame = 0;
-                message.text = "Good job! This is round two!";
+                Time.timeScale = 0;
+                movementComponent.isPaused = true;
+                panel.SetActive(true);
+                //message.text = "You did it! Play again?";
                 numOfGreens = 4;
                 ResetColor();
                 RandomizePattern();
-                ball1.gameObject.SetActive(false);
-                ball2.gameObject.SetActive(false);
-                ball3.gameObject.SetActive(false);
-                ball4.gameObject.SetActive(false);
-                ball5.gameObject.SetActive(true);
-                ball6.gameObject.SetActive(true);
-                ball7.gameObject.SetActive(true);
-                ball8.gameObject.SetActive(true);
+                box1.transform.position = box1pos;
+                box2.transform.position = box2pos;
+                box3.transform.position = box3pos;
+                box4.transform.position = box4pos;
+
+                //box1.gameObject.SetActive(false);
+                //box2.gameObject.SetActive(false);
+                //box3.gameObject.SetActive(false);
+                //box4.gameObject.SetActive(false);
+                //box5.gameObject.SetActive(true);
+                //box6.gameObject.SetActive(true);
+                //box7.gameObject.SetActive(true);
+                //box8.gameObject.SetActive(true);
 
                 checkmark = 0;
-                numOfPlays--;
+                //numOfPlays--;
             }
         }
-        else if(numOfPlays==0)
-        {
-            message.gameObject.SetActive(false);
-            Time.timeScale = 0;
-            movementComponent.isPaused = true;
-            panel.SetActive(true);
-        }
+        //else if(numOfPlays==0)
+        //{
+        //    message.gameObject.SetActive(false);
+        //    Time.timeScale = 0;
+        //    movementComponent.isPaused = true;
+        //    panel.SetActive(true);
+        //}
     }
     void RandomizePattern()
     {
